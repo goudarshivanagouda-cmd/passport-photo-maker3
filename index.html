@@ -1,0 +1,220 @@
+<!-- ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜ್ ಫೋಟೋ ಮೇಕರ್ (v2) - Blogspot ಪೇಜ್‌ನ HTML view ನಲ್ಲಿ ಪೇಸ್ಟ್ ಮಾಡಿ -->
+<div id="pp-app">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700;800&display=swap');
+#pp-app{font-family:'Noto Sans Kannada',Arial,sans-serif;max-width:900px;margin:20px auto;background:#fff;border-radius:22px;box-shadow:0 10px 35px rgba(0,0,0,.12);overflow:hidden;color:#222;box-sizing:border-box}
+#pp-app *{box-sizing:border-box}
+#pp-app .pp-top{height:8px;background:#e11d48}
+#pp-app .pp-head{background:#fff0f2;text-align:center;padding:22px 14px 18px}
+#pp-app .pp-head h2{margin:0 0 6px;font-size:26px;font-weight:800;color:#be123c}
+#pp-app .pp-head p{margin:0;font-size:14px;font-weight:700;color:#e11d48}
+#pp-app .pp-body{padding:22px 20px;text-align:center}
+#pp-app .pp-step{display:none}
+#pp-app .pp-step.on{display:block}
+#pp-app .pp-title{font-size:16px;font-weight:700;margin:0 0 14px}
+#pp-app .pp-drop{border:3px dashed #e11d48;background:#fff7f8;border-radius:16px;padding:40px 16px;cursor:pointer}
+#pp-app .pp-drop .ic{font-size:48px}
+#pp-app .pp-drop .tx{font-weight:700;color:#be123c;margin-top:6px}
+#pp-app .pp-drop .sm{font-size:12px;color:#777;margin-top:4px}
+#pp-app .pp-stage{background:#6b7075;border-radius:12px;min-height:200px;padding:0;display:flex;justify-content:center;align-items:center;overflow:hidden}
+#pp-app .pp-wrap{position:relative;display:inline-block;line-height:0;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+#pp-app #pp-img{display:block;max-width:100%;max-height:340px;pointer-events:none}
+#pp-app #pp-crop{position:absolute;border:1.5px solid #2f8cff;background:rgba(120,140,255,.38);box-shadow:0 0 0 9999px rgba(0,0,0,.45);cursor:move;touch-action:none}
+#pp-app #pp-crop:before,#pp-app #pp-crop:after{content:"";position:absolute;left:0;right:0;border-top:1px dashed rgba(255,255,255,.6);pointer-events:none}
+#pp-app #pp-crop:before{top:33.3%}
+#pp-app #pp-crop:after{top:66.6%}
+#pp-app .pp-h{position:absolute;width:16px;height:16px;background:#fff;border:2px solid #2f8cff;border-radius:3px}
+#pp-app .pp-h.nw{left:-9px;top:-9px;cursor:nwse-resize}
+#pp-app .pp-h.ne{right:-9px;top:-9px;cursor:nesw-resize}
+#pp-app .pp-h.sw{left:-9px;bottom:-9px;cursor:nesw-resize}
+#pp-app .pp-h.se{right:-9px;bottom:-9px;cursor:nwse-resize}
+#pp-app .pp-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px}
+#pp-app button{font-family:inherit;border:0;cursor:pointer;font-size:15px;font-weight:700;padding:14px 26px;border-radius:10px}
+#pp-app .b1{background:linear-gradient(135deg,#e11d48,#be123c);color:#fff;box-shadow:0 6px 14px rgba(190,18,60,.35)}
+#pp-app .b2{background:#e8ecf1;color:#333}
+#pp-app .b3{background:#16a34a;color:#fff;box-shadow:0 6px 14px rgba(22,163,74,.3)}
+#pp-app .pp-res{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:flex-start;text-align:left}
+#pp-app .pp-sheetbox{flex:1 1 300px;text-align:center}
+#pp-app #pp-sheet{max-width:100%;width:340px;height:auto;border:1px solid #ccc;box-shadow:0 4px 14px rgba(0,0,0,.15);background:#fff}
+#pp-app .pp-ctl{flex:1 1 240px;background:#fff7f8;border:1px solid #fbd0d8;border-radius:14px;padding:16px}
+#pp-app .pp-ctl h3{margin:0 0 10px;font-size:16px;color:#be123c}
+#pp-app .pp-ctl label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px}
+#pp-app .pp-ctl input[type=range]{width:100%}
+#pp-app .pp-ctl select{width:100%;padding:8px;border-radius:8px;border:1px solid #ccc;font-family:inherit}
+#pp-app .pp-info{font-size:12px;color:#666;margin-top:10px;text-align:center}
+#pp-app .pp-foot{background:#f1f4f8;text-align:center;padding:16px;font-size:12px;font-weight:700;letter-spacing:.5px;color:#64748b}
+</style>
+
+<div class="pp-top"></div>
+<div class="pp-head">
+  <h2>ಪಾಸ್‌ಪೋರ್ಟ್ ಸೈಜ್ ಫೋಟೋ ಮೇಕರ್</h2>
+  <p>ಒಂದೇ ಪೇಪರ್‌ನಲ್ಲಿ 6 ಫೋಟೋ (4x6 Size / 10x15 cm) &amp; ಬ್ಯೂಟಿಫೈ</p>
+</div>
+
+<div class="pp-body">
+  <!-- ಹಂತ 1: ಫೋಟೋ ಆಯ್ಕೆ -->
+  <div class="pp-step on" id="pp-s1">
+    <div class="pp-title">📷 ನಿಮ್ಮ ಫೋಟೋ ಆಯ್ಕೆ ಮಾಡಿ</div>
+    <div class="pp-drop" id="pp-drop">
+      <div class="ic">🖼️</div>
+      <div class="tx">ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ ಫೋಟೋ ಆಯ್ಕೆ ಮಾಡಿ</div>
+      <div class="sm">JPG / PNG — ಫೋಟೋ ನಿಮ್ಮ ಸಾಧನದಲ್ಲೇ ಇರುತ್ತದೆ, ಎಲ್ಲಿಗೂ ಅಪ್‌ಲೋಡ್ ಆಗುವುದಿಲ್ಲ</div>
+    </div>
+    <input type="file" id="pp-file" accept="image/*" style="display:none">
+  </div>
+
+  <!-- ಹಂತ 2: ಕ್ರಾಪ್ -->
+  <div class="pp-step" id="pp-s2">
+    <div class="pp-title">✂️ ಪಾಸ್‌ಪೋರ್ಟ್ ಅಳತೆಗೆ ಕ್ರಾಪ್ ಮಾಡಿ (3.5 x 4.5 cm ratio)</div>
+    <div class="pp-stage">
+      <div class="pp-wrap" id="pp-wrap">
+        <img id="pp-img" alt="">
+        <div id="pp-crop">
+          <span class="pp-h nw" data-c="nw"></span><span class="pp-h ne" data-c="ne"></span>
+          <span class="pp-h sw" data-c="sw"></span><span class="pp-h se" data-c="se"></span>
+        </div>
+      </div>
+    </div>
+    <div class="pp-btns">
+      <button class="b1" id="pp-next">✅ ಕ್ರಾಪ್ ಖಚಿತಪಡಿಸಿ (Next)</button>
+      <button class="b2" id="pp-cancel">ರದ್ದುಮಾಡಿ</button>
+    </div>
+  </div>
+
+  <!-- ಹಂತ 3: ಫಲಿತಾಂಶ -->
+  <div class="pp-step" id="pp-s3">
+    <div class="pp-title">🎉 ನಿಮ್ಮ ಪಾಸ್‌ಪೋರ್ಟ್ ಫೋಟೋ ಶೀಟ್ ಸಿದ್ಧ</div>
+    <div class="pp-res">
+      <div class="pp-sheetbox">
+        <canvas id="pp-sheet"></canvas>
+        <div class="pp-info" id="pp-info"></div>
+      </div>
+      <div class="pp-ctl">
+        <h3>✨ ಬ್ಯೂಟಿಫೈ</h3>
+        <label>ಬೆಳಕು (Brightness)</label><input type="range" id="pp-br" min="70" max="140" value="100">
+        <label>ಕಾಂಟ್ರಾಸ್ಟ್ (Contrast)</label><input type="range" id="pp-co" min="70" max="140" value="100">
+        <label>ಬಣ್ಣ (Saturation)</label><input type="range" id="pp-sa" min="50" max="150" value="100">
+        <label>ಪೇಪರ್ ಸೈಜ್</label>
+        <select id="pp-paper">
+          <option value="1200,1800">4 × 6 inch (6 ಫೋಟೋ)</option>
+          <option value="1500,2100">5 × 7 inch</option>
+          <option value="2480,3508">A4 (30 ಫೋಟೋ)</option>
+        </select>
+        <label>ಕತ್ತರಿಸುವ ಗೆರೆ</label>
+        <select id="pp-bd"><option value="1">ಹೌದು</option><option value="0">ಬೇಡ</option></select>
+      </div>
+    </div>
+    <div class="pp-btns">
+      <button class="b3" id="pp-dl">⬇ ಶೀಟ್ ಡೌನ್‌ಲೋಡ್</button>
+      <button class="b1" id="pp-dl1">⬇ ಒಂದು ಫೋಟೋ</button>
+      <button class="b1" id="pp-pr">🖨 ಪ್ರಿಂಟ್</button>
+      <button class="b2" id="pp-back">← ಮತ್ತೆ ಕ್ರಾಪ್</button>
+      <button class="b2" id="pp-new">ಹೊಸ ಫೋಟೋ</button>
+    </div>
+  </div>
+</div>
+
+<div class="pp-foot">CREATED BY : SHIVANAGOUDAGOUDAR.BLOGSPOT.COM</div>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var R=35/45, PW=413, PH=531;
+  var img=$("pp-img"), wrap=$("pp-wrap"), box=$("pp-crop");
+  var c={x:0,y:0,w:0,h:0}, dw=0, dh=0, mode=null, st=null;
+  var base=document.createElement("canvas"); base.width=PW; base.height=PH;
+  var fin=document.createElement("canvas"); fin.width=PW; fin.height=PH;
+
+  function show(n){["pp-s1","pp-s2","pp-s3"].forEach(function(id,i){$(id).className="pp-step"+(i===n-1?" on":"")});}
+  function put(){box.style.left=c.x+"px";box.style.top=c.y+"px";box.style.width=c.w+"px";box.style.height=c.h+"px";}
+  function initCrop(){
+    dw=img.clientWidth; dh=img.clientHeight;
+    if(!dw||!dh) return;
+    var h=Math.min(dh,dw/R)*0.85; c.h=h; c.w=h*R;
+    c.x=(dw-c.w)/2; c.y=(dh-c.h)/2; put();
+  }
+  function rel(e){var r=wrap.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
+
+  box.addEventListener("pointerdown",function(e){
+    e.preventDefault(); box.setPointerCapture(e.pointerId);
+    var p=rel(e), k=e.target.getAttribute("data-c");
+    if(k){
+      mode="r"; var sx=(k==="ne"||k==="se")?-1:1, sy=(k==="sw"||k==="se")?-1:1;
+      // anchor = opposite corner
+      st={sx:(k==="ne"||k==="se")?1:-1, sy:(k==="sw"||k==="se")?1:-1,
+          ax:(k==="ne"||k==="se")?c.x:c.x+c.w, ay:(k==="sw"||k==="se")?c.y:c.y+c.h};
+    }else{ mode="m"; st={px:p.x,py:p.y,x:c.x,y:c.y}; }
+  });
+  box.addEventListener("pointermove",function(e){
+    if(!mode) return; var p=rel(e);
+    if(mode==="m"){
+      c.x=Math.max(0,Math.min(dw-c.w,st.x+p.x-st.px));
+      c.y=Math.max(0,Math.min(dh-c.h,st.y+p.y-st.py));
+    }else{
+      var w=st.sx>0?p.x-st.ax:st.ax-p.x;
+      var maxW=Math.min(st.sx>0?dw-st.ax:st.ax,(st.sy>0?dh-st.ay:st.ay)*R);
+      w=Math.max(40,Math.min(maxW,w)); var h=w/R;
+      c.w=w;c.h=h; c.x=st.sx>0?st.ax:st.ax-w; c.y=st.sy>0?st.ay:st.ay-h;
+    }
+    put();
+  });
+  function up(){mode=null;}
+  box.addEventListener("pointerup",up); box.addEventListener("pointercancel",up);
+
+  $("pp-drop").onclick=function(){$("pp-file").click();};
+  $("pp-file").onchange=function(e){
+    var f=e.target.files[0]; if(!f) return;
+    img.onload=function(){show(2);setTimeout(initCrop,30);};
+    img.src=URL.createObjectURL(f);
+    e.target.value="";
+  };
+  window.addEventListener("resize",function(){ if($("pp-s2").className.indexOf("on")>-1) initCrop(); });
+  $("pp-cancel").onclick=function(){show(1);};
+  $("pp-new").onclick=function(){show(1);};
+  $("pp-back").onclick=function(){show(2);setTimeout(initCrop,30);};
+
+  $("pp-next").onclick=function(){
+    var k=img.naturalWidth/img.clientWidth, x=base.getContext("2d");
+    x.fillStyle="#fff"; x.fillRect(0,0,PW,PH);
+    x.drawImage(img,c.x*k,c.y*k,c.w*k,c.h*k,0,0,PW,PH);
+    show(3); build();
+  };
+
+  function applyFilter(){
+    var x=fin.getContext("2d");
+    x.filter="none"; x.clearRect(0,0,PW,PH);
+    x.filter="brightness("+$("pp-br").value+"%) contrast("+$("pp-co").value+"%) saturate("+$("pp-sa").value+"%)";
+    x.drawImage(base,0,0);
+    x.filter="none";
+  }
+  function build(){
+    applyFilter();
+    var p=$("pp-paper").value.split(","), W=+p[0], H=+p[1], m=30, g=24;
+    var cols=Math.floor((W-2*m+g)/(PW+g)), rows=Math.floor((H-2*m+g)/(PH+g));
+    var s=$("pp-sheet"); s.width=W; s.height=H;
+    var x=s.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,W,H);
+    var tw=cols*PW+(cols-1)*g, th=rows*PH+(rows-1)*g, sx=(W-tw)/2, sy=(H-th)/2;
+    for(var r=0;r<rows;r++)for(var q=0;q<cols;q++){
+      var px=Math.round(sx+q*(PW+g)), py=Math.round(sy+r*(PH+g));
+      x.drawImage(fin,px,py);
+      if($("pp-bd").value==="1"){x.strokeStyle="#999";x.lineWidth=2;x.strokeRect(px,py,PW,PH);}
+    }
+    $("pp-info").textContent="ಒಟ್ಟು "+(cols*rows)+" ಫೋಟೋ • 3.5 × 4.5 cm • 300 DPI";
+  }
+  ["pp-br","pp-co","pp-sa","pp-paper","pp-bd"].forEach(function(id){$(id).oninput=build;$(id).onchange=build;});
+
+  function save(cv,name){
+    cv.toBlob(function(b){var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(a.href)},2000);},"image/jpeg",0.95);
+  }
+  $("pp-dl").onclick=function(){save($("pp-sheet"),"passport-photos-sheet.jpg");};
+  $("pp-dl1").onclick=function(){save(fin,"passport-photo.jpg");};
+  $("pp-pr").onclick=function(){
+    var w=window.open("","_blank"); if(!w){alert("Pop-up ಅನುಮತಿಸಿ");return;}
+    w.document.write('<html><head><title>Print</title><style>@page{margin:0}body{margin:0}img{width:100%;display:block}</style></head><body><img src="'+$("pp-sheet").toDataURL("image/jpeg",0.95)+'"></body></html>');
+    w.document.close(); w.onload=function(){w.focus();w.print();};
+  };
+})();
+</script>
+</div>
